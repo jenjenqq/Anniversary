@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Anniversary! ❤️</title>
+  <!-- Google Fonts: Playfair Display & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      /* Background Utama Suasana Cream Vintage */
+      background: linear-gradient(135deg, #f7f0e6 0%, #ede3d3 50%, #e3d5c1 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #5c121b;
+    }
+
+    .card {
+      background: #faf4eb;
+      border: 1.5px solid #d4bda2;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(92, 18, 27, 0.12), inset 0 0 15px rgba(255, 255, 255, 0.6);
+      width: 100%;
+      max-width: 390px;
+      text-align: center;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+      animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Judul Teks Merah Vintage dengan Gradasi */
+    h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 12px;
+      font-size: 1.65rem;
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+    
+    h2 span {
+  background: linear-gradient(135deg, #801825 0%, #4a0c13 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+    p {
+      color: #6b2831;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    /* Keypad Tampilan Password */
+    .pass-display {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 10px;
+      font-size: 2rem;
+      background: linear-gradient(135deg, #801825 0%, #52121a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      min-height: 45px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 270px;
+      margin: 0 auto 15px auto;
+    }
+
+    .key-btn {
+      background: #f2e6d8;
+      color: #6e1520;
+      border: 1px solid #d4bda2;
+      border-radius: 50%;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 62px;
+      height: 62px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    }
+
+    .key-btn:active {
+      background: #e3d0b8;
+      color: #4a0c13;
+      transform: scale(0.92);
+      border-color: #801825;
+    }
+
+    /* Tampilan Kalender Visual Vintage Cream */
+    .calendar-card {
+      background: #f2e7d8;
+      border-radius: 15px;
+      padding: 18px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #d8c3ab;
+    }
+
+    .calendar-header {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      background: linear-gradient(135deg, #801825 0%, #4a0c13 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      font-size: 0.82rem;
+    }
+
+    .day-name {
+      font-weight: 600;
+      color: #8c424a;
+      padding-bottom: 8px;
+    }
+
+    .day-num {
+      padding: 8px 0;
+      border-radius: 8px;
+      color: #5c2229;
+    }
+
+    .day-num.anniversary {
+      background: linear-gradient(135deg, #801825 0%, #52121a 100%);
+      color: #f7ece1;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(128, 24, 37, 0.3);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+      100% { transform: scale(1); }
+    }
+
+    /* Menu & Tombol Navigasi */
+    .menu-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .menu-btn, .btn-action {
+      background: #f2e6d8;
+      color: #6e1520;
+      border: 1px solid #d4bda2;
+      padding: 14px;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      letter-spacing: 0.5px;
+      transition: all 0.25s ease;
+    }
+
+    .menu-btn:hover {
+      background: #e6d3bd;
+      border-color: #801825;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, #801825 0%, #52121a 100%);
+      color: #f7ece1;
+      border: none;
+      box-shadow: 0 4px 12px rgba(82, 18, 26, 0.25);
+    }
+
+    .btn-action:hover {
+      background: linear-gradient(135deg, #96202f 0%, #631821 100%);
+    }
+
+    .btn-back {
+      background: transparent;
+      color: #801825;
+      border: 1px solid #c9b197;
+      margin-top: 10px;
+      box-shadow: none;
+    }
+
+    .btn-back:hover {
+      background: #e8d9c5;
+    }
+
+    /* --- NOTEBOOK REALISTIK (GARIS KERTAS ASLI) --- */
+    .notebook-box {
+      background-color: #fffdf7
+      
+      
+      background-image: 
+        linear-gradient(#c8d3e0 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 91, 91, 0.4) 1px, transparent 1px);
+      background-size: 100% 28px, 100% 100%;
+      background-position: 0 0, 32px 0;
+      
+      padding: 8px 18px 12px 42px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      border: 1px solid #dfd3c3;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.05);
+
+      /* Teks Merah Vintage dengan Gradasi */
+      background-clip: padding-box;
+      color: #63141e; /* Warna dasar tinta merah vintage */
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 28px;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 190px;
+      background-color: #f0e4d3;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px dashed #b89f82;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .folder-link {
+      display: block;
+      padding: 14px;
+      background: linear-gradient(135deg, #801825 0%, #52121a 100%);
+      color: #f7ece1;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(82, 18, 26, 0.2);
+    }
+
+    .error-msg {
+      color: #b82535;
+      font-size: 0.8rem;
+      height: 20px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    
+    <!-- Hal 1: Keypad Password -->
+    <div id="sec-password" class="section active">
+      <h2>Hello, My Dearest ❤️</h2>
+      <p>Guess the Password:</p>
+      <div id="pass-display" class="pass-display">••••</div>
+      <div id="err-password" class="error-msg"></div>
+      
+      <div class="keypad">
+        <button class="key-btn" onclick="pressKey('1')">1</button>
+        <button class="key-btn" onclick="pressKey('2')">2</button>
+        <button class="key-btn" onclick="pressKey('3')">3</button>
+        <button class="key-btn" onclick="pressKey('4')">4</button>
+        <button class="key-btn" onclick="pressKey('5')">5</button>
+        <button class="key-btn" onclick="pressKey('6')">6</button>
+        <button class="key-btn" onclick="pressKey('7')">7</button>
+        <button class="key-btn" onclick="pressKey('8')">8</button>
+        <button class="key-btn" onclick="pressKey('9')">9</button>
+        <button class="key-btn" onclick="clearPass()">C</button>
+        <button class="key-btn" onclick="pressKey('0')">0</button>
+        <button class="key-btn" onclick="deleteLast()">⌫</button>
+      </div>
+    </div>
+
+    <!-- Hal 2: Kalender Visual Anniversary -->
+    <div id="sec-calendar" class="section">
+      <h2>Our Spesial Day 📅</h2>
+      <p>Celebrating the day that brought you into my life:</p>
+      
+      <div class="calendar-card">
+        <div class="calendar-header">September 2026</div>
+        <div class="calendar-grid">
+          <div class="day-name">Min</div>
+          <div class="day-name">Sen</div>
+          <div class="day-name">Sel</div>
+          <div class="day-name">Rab</div>
+          <div class="day-name">Kam</div>
+          <div class="day-name">Jum</div>
+          <div class="day-name">Sab</div>
+
+          <div></div><div></div><div></div><div></div>
+          <div class="day-num">1</div>
+          <div class="day-num">2</div>
+          <div class="day-num">3</div>
+          <div class="day-num">4</div>
+          <div class="day-num">5</div>
+          <div class="day-num">6</div>
+          <div class="day-num">7</div>
+          <div class="day-num">8</div>
+          <div class="day-num">9</div>
+          <div class="day-num">10</div>
+          <div class="day-num">11</div>
+          <div class="day-num">12</div>
+          <div class="day-num">13</div>
+          <div class="day-num">14</div>
+          
+          <!-- Anniversary Date -->
+          <div class="day-num anniversary">26 ❤️</div>
+          
+          <div class="day-num">16</div>
+          <div class="day-num">17</div>
+          <div class="day-num">18</div>
+          <div class="day-num">19</div>
+          <div class="day-num">20</div>
+          <div class="day-num">21</div>
+          <div class="day-num">22</div>
+          <div class="day-num">23</div>
+          <div class="day-num">24</div>
+          <div class="day-num">25</div>
+          <div class="day-num">26</div>
+          <div class="day-num">27</div>
+          <div class="day-num">28</div>
+          <div class="day-num">29</div>
+          <div class="day-num">30</div>
+          <div class="day-num">31</div>
+        </div>
+      </div>
+
+      <button class="btn-action" onclick="switchSection('sec-calendar', 'sec-menu')">Next</button>
+    </div>
+
+    <!-- Hal 3: Menu Utama -->
+    <div id="sec-menu" class="section">
+      <h2>Happy Anniversary ❤️ </h2>
+      <p>Choose one by one:</p>
+      <div class="menu-grid">
+        <button class="menu-btn" onclick="showSubSection('sec-pesan')">✉️ Message for Us</button>
+        <button class="menu-btn" onclick="showSubSection('sec-foto')">🖼️ About Us</button>
+        <button class="menu-btn" onclick="showSubSection('sec-folder')">📁 Museum of Us</button>
+      </div>
+    </div>
+
+    <!-- Sub 3A: Pesan -->
+    <div id="sec-pesan" class="section">
+      <h2>My Message for this Year✉️</h2>
+      <div class="notebook-box">
+        <p>First of all, I would like to say thank you for doing so much for me. Your effort, patience, time, love, and all the little things you do for me. Thank you for always trying to understand me, for listening to me, and for making me feel loved in your own ways.
+        </p>
+        <p> I’m really grateful that I got to meet you and have you by my side. Looking back at everything we’ve been through this past year, there were so many happy moments, silly moments, and even some difficult moments, but somehow, all of them became memories that I’m thankful to have with you.
+        </p>
+        <p> Aku minta maaf kalau aku tidak selalu menjadi orang yang mudah untuk kamu mengerti, tapi kamu sangat sabar dengan aku :) I’m also very sorry for the times when I might have hurt you, misunderstood you, or made things harder than they needed to be. I’m still learning how to love you better, and I hope I can keep becoming a better partner for you.
+        </p>
+        <p> Aku berharap that we can continue making many more memories together, trying new things, supporting each other, and growing side by side. Happy Anniversary 
+        </p>
+        
+
+
+      </div>
+      <button class="btn-action btn-back" onclick="showSubSection('sec-menu')">Back</button>
+    </div>
+
+    <!-- Sub 3B: Foto -->
+    <div id="sec-foto" class="section">
+      <h2>We're Together 🖼️</h2>
+      <div class="photo-placeholder">
+        <img src="Weee.jpg" alt="Foto Anniversary">
+      </div>
+      <button class="btn-action btn-back" onclick="showSubSection('sec-menu')">Back</button>
+    </div>
+
+    <!-- Sub 3C: Museum of Us -->
+    <div id="sec-folder" class="section">
+      <h2>Memories 📁</h2>
+      <p> We keeping our memories together:</p>
+      <a href="https://drive.google.com/drive/folders/1s48EzvdXFYyodkcWHQdt1de9ZscS8L2U?usp=sharing" target="_blank" class="folder-link">
+        Our Google Drive 🌹
+      </a>
+      <button class="btn-action btn-back" onclick="showSubSection('sec-menu')">Back</button>
+    </div>
+
+  </div>
+
+  <script>
+    const SECRET_PIN = "2609";
+    let currentInput = "";
+
+    function updateDisplay() {
+      const display = document.getElementById("pass-display");
+      if (currentInput.length === 0) {
+        display.textContent = "••••";
+      } else {
+        display.textContent = "•".repeat(currentInput.length);
+      }
+    }
+
+    function pressKey(num) {
+      if (currentInput.length < 4) {
+        currentInput += num;
+        updateDisplay();
+        
+        if (currentInput.length === 4) {
+          setTimeout(verifyPin, 150);
+        }
+      }
+    }
+
+    function deleteLast() {
+      currentInput = currentInput.slice(0, -1);
+      updateDisplay();
+    }
+
+    function clearPass() {
+      currentInput = "";
+      updateDisplay();
+    }
+
+    function verifyPin() {
+      const errPass = document.getElementById("err-password");
+      if (currentInput === SECRET_PIN) {
+        errPass.textContent = "";
+        switchSection("sec-password", "sec-calendar");
+      } else {
+        errPass.textContent = "PIN salah, coba lagi ya!";
+        currentInput = "";
+        updateDisplay();
+      }
+    }
+
+    function switchSection(fromId, toId) {
+      document.getElementById(fromId).classList.remove("active");
+      document.getElementById(toId).classList.add("active");
+    }
+
+    function showSubSection(targetId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(targetId).classList.add('active');
+    }
+
+    updateDisplay();
+  </script>
+</body>
+</html>
